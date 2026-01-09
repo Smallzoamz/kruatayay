@@ -513,35 +513,61 @@ app.post('/api/sync-menu', async (req, res) => {
 
         await client.query('BEGIN');
 
-        // Clear existing menu (Full Sync Strategy)
+        // 1. Preserve existing descriptions (Website Description is Master)
+        const existingRes = await client.query('SELECT id, description FROM menu_items');
+        const descriptionMap = new Map();
+        existingRes.rows.forEach(row => {
+            if (row.description) descriptionMap.set(String(row.id), row.description);
+        });
+
+        // 2. Clear existing menu (Full Sync Strategy)
         await client.query('DELETE FROM menu_items');
         await client.query('DELETE FROM menu_categories');
 
-        // Insert Categories
+        // 3. Insert Categories
         for (const cat of categories) {
+            // Ensure ID is string or int as per DB schema (schema uses casting likely, but let's be safe)
+            // SiteRestaurant Schema: id (TEXT or INT?) -> Let's check init_db.js or schema.sql to be sure. 
+            // Previous code used $1 directly. Assuming IDs are compatible.
+            // If POS sends "101" (string) and DB is INT, PG usually handles it, but let's assume it works as before.
             await client.query(
                 'INSERT INTO menu_categories (id, name, icon) VALUES ($1, $2, $3)',
                 [cat.id, cat.name, cat.icon]
             );
         }
 
-        // Insert Items
+        // 4. Insert Items (Merge Descriptions)
         for (const item of items) {
+            const itemIdStr = String(item.id);
+            // Use existing website description if available, otherwise use POS description
+            const finalDescription = descriptionMap.has(itemIdStr)
+                ? descriptionMap.get(itemIdStr)
+                : (item.description || '');
+
             await client.query(
                 `INSERT INTO menu_items (id, name, category_id, price, description, image, is_popular, is_available)
                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-                [item.id, item.name, item.category_id || item.category, item.price, item.description, item.image, item.is_popular || false, item.is_available !== false]
+                [
+                    item.id,
+                    item.name,
+                    item.category_id || item.category,
+                    item.price,
+                    finalDescription, // <--- Preserved Description
+                    item.image,
+                    item.is_popular || false,
+                    item.is_available !== false
+                ]
             );
         }
 
         await client.query('COMMIT');
 
-        console.log(`[Sync] ✅ Menu synced: ${items.length} items to DB`);
+        console.log(`[Sync] ✅ Menu synced: ${items.length} items to DB (Descriptions Preserved)`);
         res.json({ success: true, message: 'Menu synced successfully', itemsCount: items.length });
     } catch (error) {
         await client.query('ROLLBACK');
         console.error('[Sync] Error:', error);
-        res.status(500).json({ error: 'Failed to sync menu' });
+        res.status(500).json({ error: 'Failed to sync menu: ' + error.message });
     } finally {
         client.release();
     }

@@ -1088,16 +1088,61 @@ function formatDateThai(dateString) {
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear() + 543}`;
 }
 
-function getCategoryLabel(category) {
-    const labels = {
-        main: '🍜 อาหารจานเดียว',
-        side: '🍲 กับข้าว',
-        drink: '🥤 เครื่องดื่ม',
-        dessert: '🍰 ของหวาน'
-    };
-    return labels[category] || category;
+function getCategoryLabel(categoryId) {
+    if (!AdminState.data.menu || !AdminState.data.menu.categories) return categoryId;
+    const cat = AdminState.data.menu.categories.find(c => c.id == categoryId);
+    return cat ? cat.name : categoryId;
 }
 
+function renderCategoryOptions(selectedId = null) {
+    const select = document.getElementById('menuCategory');
+    if (!select || !AdminState.data.menu || !AdminState.data.menu.categories) return;
+
+    const categories = AdminState.data.menu.categories;
+    select.innerHTML = categories.map(cat =>
+        `<option value="${cat.id}" ${cat.id == selectedId ? 'selected' : ''}>${cat.icon ? cat.icon + ' ' : ''}${cat.name}</option>`
+    ).join('');
+}
+
+function openMenuModal(item = null) {
+    document.getElementById('menuModalTitle').textContent = item ? 'แก้ไขคำอธิบายเมนู' : 'เพิ่มเมนูอาหาร';
+    document.getElementById('menuForm').reset();
+
+    // Render Dynamic Categories
+    renderCategoryOptions(item ? item.category : null);
+
+    const inputsToDisable = ['menuName', 'menuCategory', 'menuPrice', 'menuImage', 'menuPopular', 'menuAvailable'];
+
+    if (item) {
+        document.getElementById('menuId').value = item.id;
+        document.getElementById('menuName').value = item.name;
+        // Category is handled by renderCategoryOptions
+        document.getElementById('menuPrice').value = item.price;
+        document.getElementById('menuDesc').value = item.description || '';
+        document.getElementById('menuImage').value = item.image || '';
+        document.getElementById('menuPopular').checked = item.isPopular;
+        document.getElementById('menuAvailable').checked = item.isAvailable;
+
+        // Restriction: Disable everything except Description
+        inputsToDisable.forEach(id => {
+            document.getElementById(id).disabled = true;
+            document.getElementById(id).classList.add('disabled-input');
+        });
+        document.getElementById('menuDesc').disabled = false; // Ensure description is editable
+    } else {
+        document.getElementById('menuId').value = '';
+        document.getElementById('menuAvailable').checked = true;
+
+        // Enable all for new items (though they might be wiped by sync)
+        inputsToDisable.forEach(id => {
+            document.getElementById(id).disabled = false;
+            document.getElementById(id).classList.remove('disabled-input');
+        });
+        document.getElementById('menuDesc').disabled = false;
+    }
+
+    openModal('menuModal');
+}
 function getStatusClass(status) {
     const classes = {
         pending: 'pending',

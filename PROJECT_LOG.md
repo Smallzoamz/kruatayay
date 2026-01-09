@@ -51,5 +51,10 @@
 | 2026-01-09 14:30 | app.js | 64-102 | initParallax | Created | เพิ่มฟังก์ชัน Parallax Scrolling Effect ด้วย requestAnimationFrame |
 | 2026-01-09 14:35 | components.js | 187-390 | FloatingLeaves | Edited | ยกเครื่อง FloatingLeaves ให้สมจริง: 3D rotation, wind gusts, swaying motion |
 | 2026-01-09 14:40 | components.js | 187-380 | FloatingLeaves | Edited | อัพเกรดเป็น SVG ใบไม้สมจริง 5 แบบ, สีธรรมชาติ 15 เฉด, เพิ่มจำนวนใบไม้ 2x |
+| 2026-01-09 16:00 | server.js | 501-548 | /api/sync-menu | Edited | อัพเดท Sync Endpoint ให้เก็บ Description เดิมของเว็บไว้ (ไม่ทับด้วยข้อมูลจาก POS) |
+| 2026-01-09 16:10 | admin.js | 1091-1150 | renderCategoryOptions | Edited | เพิ่มฟังก์ชันดึง Category แบบ Dynamic และปิดการแก้ไขข้อมูลอื่นๆ ยกเว้น Description |
+| 2026-01-09 16:20 | app.js | 459-528 | loadMenu, renderMenu | Edited | ปรับ Tab เมนูให้เป็น Dynamic และเพิ่มการแสดงราคา "เริ่มต้น" พร้อมสถานะ "หมด" |
+| 2026-01-09 18:30 | app.js | 72-74 | initParallax | Edited | ปิดการทำงานของ Parallax บนจอ Mobile/Tablet (<1024px) เพื่อแก้ปัญหากระตุก |
+| 2026-01-09 18:31 | app.js | 158-160 | initSmoothScroll | Fixed | แก้บั๊ก Social Links กดไม่ได้ โดยเพิ่มการเช็ค targetId ว่าต้องขึ้นต้นด้วย # เท่านั้น |
 
 

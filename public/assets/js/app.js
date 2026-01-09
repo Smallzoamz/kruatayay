@@ -71,6 +71,9 @@ function initParallax() {
 
     if (!heroBg || !heroSection) return;
 
+    // Optimize: Disable parallax on mobile/tablet to prevent jitter
+    if (window.innerWidth < 1024) return;
+
     // Parallax speed factor (0.5 = half speed of scroll)
     const parallaxSpeed = 0.5;
     let ticking = false;
@@ -157,7 +160,9 @@ function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+
+            // Allow external links to work normally (e.g. social links updated dynamically)
+            if (!targetId.startsWith('#') || targetId === '#') return;
 
             e.preventDefault();
             smoothScrollTo(targetId);
@@ -459,6 +464,17 @@ function updateSettingsDisplay(data) {
 async function loadMenu() {
     try {
         menuData = await API.get('/menu');
+
+        // Render Dynamic Category Tabs
+        const menuTabsContainer = document.getElementById('menuTabs');
+        if (menuTabsContainer && menuData.categories) {
+            const allBtn = '<button class="menu-tab active" data-category="all">ทั้งหมด</button>';
+            const catBtns = menuData.categories.map(cat =>
+                `<button class="menu-tab" data-category="${cat.id}">${cat.icon ? cat.icon + ' ' : ''}${cat.name}</button>`
+            ).join('');
+            menuTabsContainer.innerHTML = allBtn + catBtns;
+        }
+
         renderMenu('all');
         initMenuTabs();
     } catch (error) {
@@ -493,10 +509,12 @@ function renderMenu(category = 'all') {
     const menuGrid = document.getElementById('menuGrid');
     if (!menuGrid || !menuData) return;
 
-    let items = menuData.items.filter(item => item.isAvailable);
+    // Show all items, including Sold Out (to display badge)
+    let items = menuData.items;
 
     if (category !== 'all') {
-        items = items.filter(item => item.category === category);
+        // Loose comparison for ID (string vs int)
+        items = items.filter(item => item.category == category || item.category_id == category);
     }
 
     if (items.length === 0) {
@@ -510,17 +528,18 @@ function renderMenu(category = 'all') {
     }
 
     menuGrid.innerHTML = items.map(item => `
-        <div class="menu-card reveal active">
+        <div class="menu-card reveal active ${!item.isAvailable ? 'sold-out' : ''}">
             <div class="menu-card-image">
                 <img src="${item.image}" alt="${item.name}" loading="lazy" 
                      onerror="this.src='https://placehold.co/400x300/5D4037/FFF8E1?text=No+Image'">
                 ${item.isPopular ? '<span class="menu-card-badge">🔥 ยอดนิยม</span>' : ''}
+                ${!item.isAvailable ? '<span class="menu-card-badge sold-out-badge">🔴 หมด</span>' : ''}
             </div>
             <div class="menu-card-content">
                 <h3 class="menu-card-title">${Validator.sanitize(item.name)}</h3>
                 <p class="menu-card-desc">${Validator.sanitize(item.description)}</p>
                 <div class="menu-card-footer">
-                    <span class="menu-card-price">฿${item.price} <span>บาท</span></span>
+                    <span class="menu-card-price">เริ่มต้น ฿${item.price}</span>
                 </div>
             </div>
         </div>
