@@ -340,10 +340,10 @@ function renderMenuTable() {
             </td>
             <td>
                 <div class="action-btns">
-                    <button class="action-btn edit" onclick="editMenu(${item.id})" title="แก้ไข">
+                    <button class="action-btn edit" onclick="editMenu('${item.id}')" title="แก้ไข">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="action-btn delete" onclick="confirmDelete('menu', ${item.id})" title="ลบ">
+                    <button class="action-btn delete" onclick="confirmDelete('menu', '${item.id}')" title="ลบ">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>

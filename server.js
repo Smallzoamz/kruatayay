@@ -31,7 +31,16 @@ app.get('/api/menu', async (req, res) => {
 
         res.json({
             categories: categoriesResult.rows,
-            items: itemsResult.rows
+            items: itemsResult.rows.map(item => ({
+                id: item.id,
+                name: item.name,
+                category: item.category_id,
+                price: item.price,
+                description: item.description,
+                image: item.image,
+                isPopular: item.is_popular,
+                isAvailable: item.is_available
+            }))
         });
     } catch (error) {
         console.error('Error fetching menu:', error);

@@ -55,6 +55,7 @@
 | 2026-01-09 16:10 | admin.js | 1091-1150 | renderCategoryOptions | Edited | เพิ่มฟังก์ชันดึง Category แบบ Dynamic และปิดการแก้ไขข้อมูลอื่นๆ ยกเว้น Description |
 | 2026-01-09 16:20 | app.js | 459-528 | loadMenu, renderMenu | Edited | ปรับ Tab เมนูให้เป็น Dynamic และเพิ่มการแสดงราคา "เริ่มต้น" พร้อมสถานะ "หมด" |
 | 2026-01-09 18:30 | app.js | 72-74 | initParallax | Edited | ปิดการทำงานของ Parallax บนจอ Mobile/Tablet (<1024px) เพื่อแก้ปัญหากระตุก |
-| 2026-01-09 18:31 | app.js | 158-160 | initSmoothScroll | Fixed | แก้บั๊ก Social Links กดไม่ได้ โดยเพิ่มการเช็ค targetId ว่าต้องขึ้นต้นด้วย # เท่านั้น |
+| 2026-01-09 18:35 | server.js | 27-40 | GET /api/menu | Fixed | แก้ไขการส่งข้อมูลให้เป็น formats แบบ camelCase (item.category, item.isPopular) เพื่อให้ตรงกับ Frontend |
+| 2026-01-09 18:36 | admin.js | 343-346 | renderMenuTable | Fixed | เพิ่ม Single Quote ครอบ item.id ในปุ่ม Edit/Delete เพื่อป้องกัน error กรณี ID เป็น string |
 
 
