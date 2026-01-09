@@ -101,7 +101,7 @@ async function migrate() {
             for (const [key, value] of Object.entries(settingsData)) {
                 await client.query(
                     'INSERT INTO settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2',
-                    [key, value]
+                    [key, JSON.stringify(value)]
                 );
             }
         }
