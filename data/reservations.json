@@ -1,0 +1,40 @@
+{
+  "reservations": [
+    {
+      "id": 1,
+      "name": "คุณสมศักดิ์ มีสุข",
+      "phone": "081-234-5678",
+      "email": "somsak@email.com",
+      "date": "2026-01-10",
+      "time": "18:00",
+      "guests": 4,
+      "notes": "ต้องการโต๊ะติดสวน",
+      "status": "cancelled",
+      "createdAt": "2026-01-05T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "คุณมาลี รักดี",
+      "phone": "089-876-5432",
+      "email": "malee@email.com",
+      "date": "2026-01-12",
+      "time": "12:00",
+      "guests": 6,
+      "notes": "ฉลองวันเกิด",
+      "status": "cancelled",
+      "createdAt": "2026-01-06T14:15:00Z"
+    },
+    {
+      "id": 1767820828321,
+      "status": "cancelled",
+      "createdAt": "2026-01-07T21:20:28.295Z",
+      "name": "Thanawat Chaiyakul",
+      "phone": "0631475942",
+      "email": "oniks.themed@gmail.com",
+      "date": "2026-01-09",
+      "time": "14:00",
+      "guests": 4,
+      "notes": ""
+    }
+  ]
+}

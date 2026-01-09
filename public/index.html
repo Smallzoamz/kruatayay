@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="ครัวตายาย - ร้านอาหารไทยโบราณในบรรยากาศสวนร่มรื่น เสิร์ฟอาหารรสชาติดั้งเดิมจากสูตรตายาย">
+    <meta name="keywords" content="ครัวตายาย, ร้านอาหารไทย, อาหารไทยโบราณ, ร้านอาหารในสวน, อาหารไทยอร่อย">
+    <meta name="author" content="Bonchon-Studio">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ครัวตายาย - รสชาติแห่งความทรงจำ">
+    <meta property="og:description" content="ร้านอาหารไทยโบราณในบรรยากาศสวนร่มรื่น">
+    <meta property="og:type" content="restaurant">
+
+    <title>ครัวตายาย - รสชาติแห่งความทรงจำ</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍚</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <!-- Floating Leaves Animation -->
+    <div class="floating-leaves" id="floatingLeaves"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">🍚</div>
+                <span class="logo-text" id="logoText">ครัวตายาย</span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">หน้าแรก</a>
+                <a href="#about" class="nav-link">เกี่ยวกับเรา</a>
+                <a href="#menu" class="nav-link">เมนูอาหาร</a>
+                <a href="#gallery" class="nav-link">บรรยากาศ</a>
+                <a href="#reviews" class="nav-link">รีวิว</a>
+                <a href="#news" class="nav-link">ข่าวสาร</a>
+                <a href="#contact" class="nav-link">ติดต่อเรา</a>
+                <a href="#reservation" class="btn btn-accent nav-cta">จองโต๊ะ</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <span class="hero-badge">🌿 ร้านอาหารไทยในสวน</span>
+            <h1 class="hero-title" id="heroTitle">ครัวตายาย</h1>
+            <p class="hero-subtitle" id="heroSubtitle">รสชาติแห่งความทรงจำ
+                ที่สืบทอดมาจากรุ่นตายาย<br>มาสัมผัสอาหารไทยโบราณในบรรยากาศสวนร่มรื่น</p>
+
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary btn-lg">
+                    <i class="fas fa-utensils"></i> ดูเมนูอาหาร
+                </a>
+                <a href="#reservation" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-calendar-check"></i> จองโต๊ะ
+                </a>
+            </div>
+        </div>
+
+        <a href="#about" class="hero-scroll">
+            <span>เลื่อนลง</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop"
+                        alt="ครัวตายาย - บรรยากาศร้าน">
+                    <span class="about-image-badge" id="yearsOfTrustBadge">🏆 30+ ปีแห่งความไว้วางใจ</span>
+                </div>
+
+                <div class="about-content reveal">
+                    <h2>เรื่องราวของเรา</h2>
+                    <p id="aboutStory">
+                        ครัวตายายก่อตั้งขึ้นจากความรักในรสชาติอาหารไทยแบบดั้งเดิม ที่ตายายของเราได้ทำมาตลอดหลายสิบปี
+                        ทุกจานที่เสิร์ฟคือการถ่ายทอดความทรงจำและความรักที่มีต่ออาหาร
+                    </p>
+                    <p>
+                        เราเชื่อว่าอาหารที่ดีไม่ใช่แค่อร่อย แต่ต้องทำด้วยใจและวัตถุดิบคุณภาพที่คัดสรรมาอย่างดี
+                        บรรยากาศร้านที่ร่มรื่นเหมือนมากินข้าวบ้านยาย จะทำให้คุณรู้สึกอบอุ่นและผ่อนคลาย
+                    </p>
+
+                    <div class="about-features" id="aboutFeatures">
+                        <div class="about-feature">
+                            <i class="fas fa-leaf"></i>
+                            <span>วัตถุดิบสดใหม่</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-heart"></i>
+                            <span>ทำด้วยใจรัก</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>สูตรดั้งเดิม</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-seedling"></i>
+                            <span>บรรยากาศสวน</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOUNDER SECTION ===== -->
+    <section class="founder section" id="founder">
+        <div class="container">
+            <h2 class="section-title reveal">ผู้ก่อตั้ง</h2>
+            <p class="section-subtitle reveal">เรื่องราวของคนที่อยู่เบื้องหลังรสชาติความอร่อย</p>
+
+            <div class="founder-grid reveal">
+                <div class="founder-image">
+                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=400&fit=crop"
+                        alt="ผู้ก่อตั้ง" id="founderImage">
+                    <div class="founder-image-overlay"></div>
+                </div>
+
+                <div class="founder-content">
+                    <h3 class="founder-name" id="founderName">คุณมินดา</h3>
+                    <span class="founder-title" id="founderTitle">ผู้ก่อตั้งและเชฟหลัก</span>
+                    <p class="founder-bio" id="founderBio">
+                        คุณมินดาเติบโตมากับการทำอาหารในครัวของยาย ตั้งแต่เด็กๆ
+                        จนได้ซึมซับรสชาติและเทคนิคการทำอาหารไทยแบบดั้งเดิม
+                        ด้วยความรักในอาหารและความฝันที่จะถ่ายทอดรสชาติเหล่านั้นให้คนอื่นได้ลิ้มลอง จึงก่อตั้ง
+                        "ครัวตายาย" ขึ้นมา
+                    </p>
+                    <blockquote class="founder-quote" id="founderQuote">
+                        "อาหารที่ดี คืออาหารที่ทำด้วยใจ เหมือนที่ยายเคยทำให้เรา"
+                    </blockquote>
+
+                    <div class="founder-stats">
+                        <div class="founder-stat">
+                            <span class="stat-number" id="founderYearsExp">5+</span>
+                            <span class="stat-label">ปีประสบการณ์</span>
+                        </div>
+                        <div class="founder-stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">เมนูสูตรเด็ด</span>
+                        </div>
+                        <div class="founder-stat">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">ลูกค้าประจำ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIMELINE SECTION ===== -->
+    <section class="timeline section" id="timeline">
+        <div class="container">
+            <h2 class="section-title reveal">เส้นทางของเรา</h2>
+            <p class="section-subtitle reveal">ประวัติความเป็นมาของครัวตายาย ตั้งแต่วันแรกจนถึงวันนี้</p>
+
+            <div class="timeline-wrapper reveal" id="timelineWrapper">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2021</span>
+                        <h4>จุดเริ่มต้น</h4>
+                        <p>เปิดร้านเล็กๆ ในบ้านเกิด ด้วยเมนูไม่กี่อย่างแต่ทำด้วยใจ เริ่มจากการขายให้คนในหมู่บ้าน</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2022</span>
+                        <h4>เป็นที่รู้จัก</h4>
+                        <p>ลูกค้าเริ่มบอกต่อ มีคนมาจากต่างอำเภอ เพิ่มเมนูใหม่ๆ และขยายพื้นที่นั่งทาน</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2023</span>
+                        <h4>ปรับปรุงร้าน</h4>
+                        <p>ปรับปรุงบรรยากาศร้านให้เป็นสไตล์สวนร่มรื่น เพิ่มความสะดวกสบายให้ลูกค้า</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h4>เติบโตอย่างมั่นคง</h4>
+                        <p>มีลูกค้าประจำมากขึ้น เปิดรับออร์เดอร์จัดเลี้ยง และเพิ่มบริการจองโต๊ะออนไลน์</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2025</span>
+                        <h4>ก้าวสู่ดิจิทัล</h4>
+                        <p>เปิดช่องทาง LINE และเว็บไซต์ เพื่อให้ลูกค้าสั่งอาหารและจองโต๊ะได้สะดวกยิ่งขึ้น</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right highlight">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2026</span>
+                        <h4>ปัจจุบัน</h4>
+                        <p>ยังคงมุ่งมั่นรักษาคุณภาพและรสชาติดั้งเดิม พร้อมสร้างความทรงจำดีๆ ให้ลูกค้าทุกคน</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MENU SECTION ===== -->
+    <section class="menu section" id="menu">
+        <div class="container">
+            <h2 class="section-title reveal">เมนูอาหาร</h2>
+            <p class="section-subtitle reveal">รสชาติอาหารไทยแท้ๆ ที่คัดสรรวัตถุดิบคุณภาพ ปรุงด้วยสูตรลับจากตายาย</p>
+
+            <div class="menu-tabs reveal" id="menuTabs">
+                <button class="menu-tab active" data-category="all">ทั้งหมด</button>
+                <button class="menu-tab" data-category="main">🍜 อาหารจานเดียว</button>
+                <button class="menu-tab" data-category="side">🍲 กับข้าว</button>
+                <button class="menu-tab" data-category="drink">🥤 เครื่องดื่ม</button>
+                <button class="menu-tab" data-category="dessert">🍰 ของหวาน</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section class="gallery section" id="gallery">
+        <div class="container">
+            <h2 class="section-title reveal">บรรยากาศร้าน</h2>
+            <p class="section-subtitle reveal">สัมผัสบรรยากาศร้านอาหารในสวนที่ร่มรื่น เหมือนมากินข้าวบ้านยาย</p>
+
+            <div class="gallery-slider reveal" id="gallerySlider">
+                <div class="gallery-track" id="galleryTrack">
+                    <!-- Gallery slides will be loaded dynamically -->
+                </div>
+
+                <button class="gallery-nav prev" id="galleryPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-nav next" id="galleryNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="gallery-dots" id="galleryDots">
+                <!-- Dots will be generated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESERVATION SECTION ===== -->
+    <section class="reservation section" id="reservation">
+        <div class="container">
+            <div class="reservation-wrapper">
+                <div class="reservation-info reveal">
+                    <h2>จองโต๊ะล่วงหน้า</h2>
+                    <p>
+                        เพื่อความสะดวกสบายของคุณ กรุณาจองโต๊ะล่วงหน้าอย่างน้อย 1 วัน
+                        ทีมงานของเราพร้อมต้อนรับและดูแลคุณเป็นอย่างดี
+                    </p>
+
+                    <div class="reservation-contact">
+                        <div class="reservation-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>โทรจอง</h4>
+                                <p id="contactPhone">02-123-4567</p>
+                            </div>
+                        </div>
+                        <div class="reservation-contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>เวลาเปิดให้บริการ</h4>
+                                <p><span id="weekdaysHours">จันทร์-ศุกร์: 10:00 - 21:00</span><br>
+                                    <span id="weekendHours">เสาร์-อาทิตย์: 09:00 - 22:00</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reservation-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>ที่ตั้งร้าน</h4>
+                                <p id="contactAddress">123 ซอยสุขุมวิท 55 แขวงคลองตันเหนือ เขตวัฒนา กรุงเทพฯ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reservation-form-wrapper reveal">
+                    <h3>🗓️ กรอกข้อมูลจองโต๊ะ</h3>
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="resName">ชื่อผู้จอง <span class="required">*</span></label>
+                            <input type="text" id="resName" name="name" placeholder="กรุณากรอกชื่อ-นามสกุล" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="resPhone">เบอร์โทรศัพท์ <span class="required">*</span></label>
+                                <input type="tel" id="resPhone" name="phone" placeholder="08X-XXX-XXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resEmail">อีเมล</label>
+                                <input type="email" id="resEmail" name="email" placeholder="email@example.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="resDate">วันที่ <span class="required">*</span></label>
+                                <input type="date" id="resDate" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resTime">เวลา <span class="required">*</span></label>
+                                <select id="resTime" name="time" required>
+                                    <option value="">เลือกเวลา</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="20:00">20:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resGuests">จำนวนคน <span class="required">*</span></label>
+                            <select id="resGuests" name="guests" required>
+                                <option value="">เลือกจำนวนคน</option>
+                                <option value="1">1 คน</option>
+                                <option value="2">2 คน</option>
+                                <option value="3">3 คน</option>
+                                <option value="4">4 คน</option>
+                                <option value="5">5 คน</option>
+                                <option value="6">6 คน</option>
+                                <option value="7">7 คน</option>
+                                <option value="8">8 คน</option>
+                                <option value="9">9-10 คน</option>
+                                <option value="10">มากกว่า 10 คน</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resNotes">หมายเหตุ / ความต้องการพิเศษ</label>
+                            <textarea id="resNotes" name="notes" rows="3"
+                                placeholder="เช่น ต้องการโต๊ะติดสวน, ฉลองวันเกิด, แพ้อาหาร ฯลฯ"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-accent btn-lg form-submit">
+                            <i class="fas fa-calendar-check"></i> ยืนยันจองโต๊ะ
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REVIEWS SECTION ===== -->
+    <section class="reviews section" id="reviews">
+        <div class="container">
+            <h2 class="section-title reveal">รีวิวจากลูกค้า</h2>
+            <p class="section-subtitle reveal">ความประทับใจจากลูกค้าที่มาทานอาหารที่ครัวตายาย</p>
+
+            <!-- Review Stats -->
+            <div class="review-stats reveal">
+                <div class="review-average">
+                    <span class="average-score" id="averageRating">4.8</span>
+                    <div class="average-stars" id="averageStars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="review-count" id="reviewCount">จาก 4 รีวิว</span>
+                </div>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div class="reviews-grid reveal" id="reviewsGrid">
+                <!-- Reviews will be loaded dynamically -->
+            </div>
+
+            <!-- Review Form -->
+            <div class="review-form-wrapper reveal">
+                <h3><i class="fas fa-pen"></i> เขียนรีวิวของคุณ</h3>
+                <form id="reviewForm" class="review-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reviewName">ชื่อของคุณ</label>
+                            <input type="text" id="reviewName" name="name" placeholder="ชื่อ (เช่น คุณสมชาย)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ให้คะแนน</label>
+                            <div class="star-rating" id="starRating">
+                                <input type="radio" id="star5" name="rating" value="5" checked>
+                                <label for="star5" title="5 ดาว"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="4 ดาว"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" title="3 ดาว"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="2 ดาว"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="1 ดาว"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">รีวิวของคุณ</label>
+                        <textarea id="reviewComment" name="comment" rows="4"
+                            placeholder="แบ่งปันประสบการณ์การทานอาหารที่ครัวตายาย..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> ส่งรีวิว
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWS SECTION ===== -->
+    <section class="news section" id="news">
+        <div class="container">
+            <h2 class="section-title reveal">ข่าวสารและโปรโมชั่น</h2>
+            <p class="section-subtitle reveal">ติดตามข่าวสารและโปรโมชั่นล่าสุดจากครัวตายาย</p>
+
+            <div class="news-grid" id="newsGrid">
+                <!-- News items will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">ติดต่อเรา</h2>
+            <p class="section-subtitle reveal">เรายินดีให้บริการและตอบคำถามทุกข้อสงสัย</p>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>ที่อยู่</h4>
+                            <p id="footerAddress">123 ซอยสุขุมวิท 55<br>แขวงคลองตันเหนือ เขตวัฒนา<br>กรุงเทพฯ 10110</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>โทรศัพท์</h4>
+                            <p id="footerPhone">02-123-4567<br>089-123-4567</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>เวลาเปิดให้บริการ</h4>
+                            <p id="footerHours">จันทร์-ศุกร์: 10:00 - 21:00<br>เสาร์-อาทิตย์: 09:00 - 22:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>อีเมล</h4>
+                            <p id="footerEmail">contact@kruatayai.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-socials">
+                        <a href="#" class="social-link" id="facebookLink" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" id="instagramLink" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" id="lineLink" title="LINE">
+                            <i class="fab fa-line"></i>
+                        </a>
+                    </div>
+
+                    <a href="#" class="line-add-friend-btn" id="lineAddFriend">
+                        <i class="fab fa-line"></i>
+                        <span>เพิ่มเพื่อน LINE</span>
+                        <small>@kruatayai</small>
+                    </a>
+                </div>
+
+                <div class="contact-map reveal">
+                    <iframe id="googleMap"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5!2d100.5!3d13.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQyJzAwLjAiTiAxMDDCsDMwJzAwLjAiRQ!5e0!3m2!1sth!2sth!4v1234567890"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="footer-logo-icon">🍚</span>
+                        <span class="footer-logo-text" id="footerLogoText">ครัวตายาย</span>
+                    </div>
+                    <p id="footerDescription">ร้านอาหารไทยโบราณในบรรยากาศสวนร่มรื่น
+                        เสิร์ฟอาหารรสชาติดั้งเดิมจากสูตรตายาย
+                        ด้วยความรักและใส่ใจในทุกจาน</p>
+                    <div class="contact-socials" style="margin-top: 1rem;">
+                        <a href="#" class="social-link" id="footerFacebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" id="footerInstagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" id="footerLine"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>ลิงก์ด่วน</h4>
+                    <nav class="footer-links">
+                        <a href="#home">หน้าแรก</a>
+                        <a href="#about">เกี่ยวกับเรา</a>
+                        <a href="#menu">เมนูอาหาร</a>
+                        <a href="#gallery">บรรยากาศ</a>
+                    </nav>
+                </div>
+
+                <div class="footer-section">
+                    <h4>บริการ</h4>
+                    <nav class="footer-links">
+                        <a href="#reservation">จองโต๊ะ</a>
+                        <a href="#news">ข่าวสาร</a>
+                        <a href="#contact">ติดต่อเรา</a>
+                        <a href="admin.html">Admin</a>
+                    </nav>
+                </div>
+
+                <div class="footer-section">
+                    <h4>ติดต่อ</h4>
+                    <nav class="footer-links" id="footerContactLinks">
+                        <a href="tel:021234567" id="footerPhoneLink"><i class="fas fa-phone"></i> <span
+                                id="footerPhoneNum">02-123-4567</span></a>
+                        <a href="mailto:contact@kruatayai.com" id="footerEmailLink"><i class="fas fa-envelope"></i>
+                            <span id="footerEmailText">contact@kruatayai.com</span></a>
+                        <a href="#" id="footerLineLink"><i class="fab fa-line"></i> <span
+                                id="footerLineId">@kruatayai</span></a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright" id="footerCopyright">© 2026 ครัวตายาย. All rights reserved.</p>
+                <p class="footer-credits">Designed & Developed by <a href="#">Bonchon-Studio</a> 🌿</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="Gallery Image" id="lightboxImage">
+        </div>
+        <button class="lightbox-close" id="lightboxClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

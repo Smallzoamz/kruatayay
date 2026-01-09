@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel - ครัวตายาย</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩🏻‍💼</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/admin.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <!-- ===== LOGIN PAGE ===== -->
+    <div class="login-page" id="loginPage">
+        <div class="login-card">
+            <div class="login-logo">👩🏻‍💼</div>
+            <h1>Admin Panel</h1>
+            <p>ครัวตายาย - ระบบจัดการร้านอาหาร</p>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="accessCode">รหัสเข้าใช้งาน</label>
+                    <input type="password" id="accessCode" placeholder="กรุณากรอกรหัส" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ
+                </button>
+            </form>
+
+            <p class="login-back">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> กลับหน้าเว็บไซต์</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN DASHBOARD ===== -->
+    <div class="admin-wrapper" id="adminWrapper" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🍚</div>
+                <div class="sidebar-title">
+                    <h1>ครัวตายาย</h1>
+                    <span>Admin Panel</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">หลัก</span>
+                </div>
+                <a class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">จัดการข้อมูล</span>
+                </div>
+                <a class="nav-item" data-section="menu">
+                    <i class="fas fa-utensils"></i>
+                    <span>เมนูอาหาร</span>
+                </a>
+                <a class="nav-item" data-section="gallery">
+                    <i class="fas fa-images"></i>
+                    <span>แกลเลอรี่</span>
+                </a>
+                <a class="nav-item" data-section="reservations">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>การจอง</span>
+                    <span class="badge" id="pendingBadge">0</span>
+                </a>
+                <a class="nav-item" data-section="news">
+                    <i class="fas fa-newspaper"></i>
+                    <span>ข่าวสาร</span>
+                </a>
+                <a class="nav-item" data-section="reviews">
+                    <i class="fas fa-star"></i>
+                    <span>รีวิว</span>
+                    <span class="badge" id="pendingReviewsBadge">0</span>
+                </a>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">ตั้งค่า</span>
+                </div>
+                <a class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>ข้อมูลร้าน</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="user-avatar">A</div>
+                    <div class="user-info">
+                        <h4>Admin</h4>
+                        <span>ผู้ดูแลระบบ</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn" title="ออกจากระบบ">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="menu-toggle-admin" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h2 id="pageTitle">Dashboard</h2>
+                        <p id="pageSubtitle">ภาพรวมของร้านครัวตายาย</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="ค้นหา..." id="globalSearch">
+                    </div>
+                    <div class="header-actions">
+                        <button class="header-action-btn" id="refreshBtn" title="รีเฟรช">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <a href="index.html" class="header-action-btn" title="ดูเว็บไซต์">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DASHBOARD SECTION ===== -->
+            <section class="content-section active" id="dashboardSection">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="statMenuCount">0</h3>
+                            <p>เมนูอาหาร</p>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>รายการทั้งหมด</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon menu">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="statGalleryCount">0</h3>
+                            <p>รูปภาพ</p>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>รูปในแกลเลอรี่</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon gallery">
+                            <i class="fas fa-images"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="statReservationCount">0</h3>
+                            <p>การจองวันนี้</p>
+                            <div class="stat-trend up">
+                                <i class="fas fa-calendar"></i>
+                                <span>รอยืนยัน</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon reservation">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="statNewsCount">0</h3>
+                            <p>ข่าวสาร</p>
+                            <div class="stat-trend up">
+                                <i class="fas fa-newspaper"></i>
+                                <span>บทความทั้งหมด</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon news">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reservations -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            การจองล่าสุด
+                        </h3>
+                        <div class="card-actions">
+                            <button class="btn btn-secondary" onclick="showSection('reservations')">
+                                ดูทั้งหมด
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ชื่อผู้จอง</th>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>จำนวน</th>
+                                    <th>สถานะ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentReservations">
+                                <!-- Will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== MENU SECTION ===== -->
+            <section class="content-section" id="menuSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-utensils"></i>
+                            รายการเมนูอาหาร
+                        </h3>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="openMenuModal()">
+                                <i class="fas fa-plus"></i> เพิ่มเมนู
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>รูปภาพ</th>
+                                    <th>ชื่อเมนู</th>
+                                    <th>หมวดหมู่</th>
+                                    <th>ราคา</th>
+                                    <th>สถานะ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menuTableBody">
+                                <!-- Will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== GALLERY SECTION ===== -->
+            <section class="content-section" id="gallerySection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-images"></i>
+                            รูปภาพแกลเลอรี่
+                        </h3>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="openGalleryModal()">
+                                <i class="fas fa-plus"></i> เพิ่มรูปภาพ
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>รูปภาพ</th>
+                                    <th>ชื่อ</th>
+                                    <th>คำอธิบาย</th>
+                                    <th>ลำดับ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="galleryTableBody">
+                                <!-- Will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== RESERVATIONS SECTION ===== -->
+            <section class="content-section" id="reservationsSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            รายการจองโต๊ะ
+                        </h3>
+                        <div class="card-actions">
+                            <select id="reservationFilter" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                                <option value="all">ทั้งหมด</option>
+                                <option value="pending">รอยืนยัน</option>
+                                <option value="confirmed">ยืนยันแล้ว</option>
+                                <option value="cancelled">ยกเลิก</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ชื่อผู้จอง</th>
+                                    <th>โทรศัพท์</th>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>จำนวน</th>
+                                    <th>สถานะ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationsTableBody">
+                                <!-- Will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== NEWS SECTION ===== -->
+            <section class="content-section" id="newsSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-newspaper"></i>
+                            ข่าวสารและโปรโมชั่น
+                        </h3>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="openNewsModal()">
+                                <i class="fas fa-plus"></i> เพิ่มข่าว
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>รูปภาพ</th>
+                                    <th>หัวข้อ</th>
+                                    <th>วันที่</th>
+                                    <th>สถานะ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsTableBody">
+                                <!-- Will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== REVIEWS SECTION ===== -->
+            <section class="content-section" id="reviewsSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-star"></i>
+                            จัดการรีวิว
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Review Tabs -->
+                        <div class="review-tabs">
+                            <button class="review-tab active" data-filter="pending">
+                                <i class="fas fa-clock"></i> รอการอนุมัติ
+                                <span class="tab-count" id="pendingCount">0</span>
+                            </button>
+                            <button class="review-tab" data-filter="approved">
+                                <i class="fas fa-check"></i> อนุมัติแล้ว
+                                <span class="tab-count" id="approvedCount">0</span>
+                            </button>
+                            <button class="review-tab" data-filter="all">
+                                <i class="fas fa-list"></i> ทั้งหมด
+                            </button>
+                        </div>
+
+                        <!-- Reviews List -->
+                        <div class="reviews-list" id="adminReviewsList">
+                            <!-- Reviews will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SETTINGS SECTION ===== -->
+            <section class="content-section" id="settingsSection">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-cog"></i>
+                            ข้อมูลร้าน
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="settingsForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setName">ชื่อร้าน</label>
+                                    <input type="text" id="setName" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setTagline">Tagline</label>
+                                    <input type="text" id="setTagline" name="tagline">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setFoundedYear">ปีที่ก่อตั้งร้าน (พ.ศ. หรือ ค.ศ.)</label>
+                                    <input type="number" id="setFoundedYear" name="foundedYear" placeholder="2021"
+                                        min="1900" max="2100">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setDescription">คำอธิบายร้าน</label>
+                                <textarea id="setDescription" name="description" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setPhone">โทรศัพท์</label>
+                                    <input type="tel" id="setPhone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setMobile">มือถือ</label>
+                                    <input type="tel" id="setMobile" name="mobile">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setEmail">อีเมล</label>
+                                <input type="email" id="setEmail" name="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setAddress">ที่อยู่</label>
+                                <textarea id="setAddress" name="address" rows="2"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setWeekdays">เวลาเปิด (จันทร์-ศุกร์)</label>
+                                    <input type="text" id="setWeekdays" name="weekdays" placeholder="10:00 - 21:00">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setWeekend">เวลาเปิด (เสาร์-อาทิตย์)</label>
+                                    <input type="text" id="setWeekend" name="weekend" placeholder="09:00 - 22:00">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setLineId">LINE ID</label>
+                                    <input type="text" id="setLineId" name="lineId" placeholder="@kruatayai">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setLineUrl">LINE URL</label>
+                                    <input type="url" id="setLineUrl" name="lineUrl">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setFacebook">Facebook URL</label>
+                                    <input type="url" id="setFacebook" name="facebook">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setInstagram">Instagram URL</label>
+                                    <input type="url" id="setInstagram" name="instagram">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setMapEmbed">Google Maps Embed URL</label>
+                                <input type="url" id="setMapEmbed" name="mapEmbed">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลง
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Founder Section Settings -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-user-tie"></i>
+                            ข้อมูลผู้ก่อตั้ง
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="founderForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="setFounderName">ชื่อผู้ก่อตั้ง</label>
+                                    <input type="text" id="setFounderName" name="name" placeholder="คุณมินดา">
+                                </div>
+                                <div class="form-group">
+                                    <label for="setFounderTitle">ตำแหน่ง/คำอธิบาย</label>
+                                    <input type="text" id="setFounderTitle" name="title"
+                                        placeholder="ผู้ก่อตั้งและเชฟหลัก">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setFounderImage">URL รูปภาพผู้ก่อตั้ง</label>
+                                <input type="url" id="setFounderImage" name="image"
+                                    placeholder="https://example.com/image.jpg">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setFounderBio">ประวัติผู้ก่อตั้ง</label>
+                                <textarea id="setFounderBio" name="bio" rows="4"
+                                    placeholder="เรื่องราวความเป็นมาของผู้ก่อตั้ง..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setFounderQuote">คติพจน์/คำพูดเด่น</label>
+                                <input type="text" id="setFounderQuote" name="quote"
+                                    placeholder="อาหารที่ดี คืออาหารที่ทำด้วยใจ...">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> บันทึกข้อมูลผู้ก่อตั้ง
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- About Section Settings -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-info-circle"></i>
+                            เกี่ยวกับร้าน
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="aboutForm">
+                            <div class="form-group">
+                                <label for="setAboutTitle">หัวข้อ</label>
+                                <input type="text" id="setAboutTitle" name="title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setAboutStory">เรื่องราวของร้าน</label>
+                                <textarea id="setAboutStory" name="story" rows="4"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลง
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Timeline Info -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-history"></i>
+                            Timeline ประวัติร้าน
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>หมายเหตุ:</strong> สามารถแก้ไข Timeline ได้ในไฟล์ <code>data/settings.json</code>
+                            ในส่วน "timeline" array
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.875rem;">
+                            ในอนาคตจะมี UI สำหรับจัดการ Timeline ได้สะดวกยิ่งขึ้น
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Menu Modal -->
+    <div class="modal-overlay" id="menuModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="menuModalTitle">เพิ่มเมนูอาหาร</h3>
+                <button class="modal-close" onclick="closeModal('menuModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="menuForm">
+                    <input type="hidden" id="menuId" name="id">
+
+                    <div class="form-group">
+                        <label for="menuName">ชื่อเมนู <span class="required">*</span></label>
+                        <input type="text" id="menuName" name="name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="menuCategory">หมวดหมู่ <span class="required">*</span></label>
+                            <select id="menuCategory" name="category" required>
+                                <option value="main">🍜 อาหารจานเดียว</option>
+                                <option value="side">🍲 กับข้าว</option>
+                                <option value="drink">🥤 เครื่องดื่ม</option>
+                                <option value="dessert">🍰 ของหวาน</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="menuPrice">ราคา (บาท) <span class="required">*</span></label>
+                            <input type="number" id="menuPrice" name="price" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="menuDesc">คำอธิบาย</label>
+                        <textarea id="menuDesc" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="menuImage">URL รูปภาพ</label>
+                        <input type="url" id="menuImage" name="image" placeholder="https://...">
+                        <p class="form-hint">แนะนำขนาด 400x300 pixels</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="menuPopular" name="isPopular">
+                                เมนูยอดนิยม
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="menuAvailable" name="isAvailable" checked>
+                                พร้อมขาย
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('menuModal')">ยกเลิก</button>
+                <button class="btn btn-primary" onclick="saveMenu()">
+                    <i class="fas fa-save"></i> บันทึก
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal-overlay" id="galleryModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="galleryModalTitle">เพิ่มรูปภาพ</h3>
+                <button class="modal-close" onclick="closeModal('galleryModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="galleryForm">
+                    <input type="hidden" id="galleryId" name="id">
+
+                    <div class="form-group">
+                        <label for="galleryTitle">ชื่อรูปภาพ <span class="required">*</span></label>
+                        <input type="text" id="galleryTitle" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="galleryDesc">คำอธิบาย</label>
+                        <textarea id="galleryDesc" name="description" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="galleryUrl">URL รูปภาพ <span class="required">*</span></label>
+                        <input type="url" id="galleryUrl" name="url" required placeholder="https://...">
+                        <p class="form-hint">แนะนำขนาด 1000x600 pixels</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="galleryOrder">ลำดับการแสดงผล</label>
+                        <input type="number" id="galleryOrder" name="order" min="1" value="1">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('galleryModal')">ยกเลิก</button>
+                <button class="btn btn-primary" onclick="saveGallery()">
+                    <i class="fas fa-save"></i> บันทึก
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Modal -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="newsModalTitle">เพิ่มข่าวสาร</h3>
+                <button class="modal-close" onclick="closeModal('newsModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newsForm">
+                    <input type="hidden" id="newsId" name="id">
+
+                    <div class="form-group">
+                        <label for="newsTitle">หัวข้อข่าว <span class="required">*</span></label>
+                        <input type="text" id="newsTitle" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsExcerpt">เนื้อหาสั้น <span class="required">*</span></label>
+                        <textarea id="newsExcerpt" name="excerpt" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsContent">เนื้อหาเต็ม</label>
+                        <textarea id="newsContent" name="content" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsImage">URL รูปภาพ</label>
+                        <input type="url" id="newsImage" name="image" placeholder="https://...">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newsDate">วันที่</label>
+                            <input type="date" id="newsDate" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="newsPublished" name="isPublished" checked>
+                                เผยแพร่
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('newsModal')">ยกเลิก</button>
+                <button class="btn btn-primary" onclick="saveNews()">
+                    <i class="fas fa-save"></i> บันทึก
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Detail Modal -->
+    <div class="modal-overlay" id="reservationModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">รายละเอียดการจอง</h3>
+                <button class="modal-close" onclick="closeModal('reservationModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="reservationDetail">
+                <!-- Will be loaded dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="cancelReservationBtn">
+                    <i class="fas fa-times"></i> ยกเลิกการจอง
+                </button>
+                <button class="btn btn-primary" id="confirmReservationBtn">
+                    <i class="fas fa-check"></i> ยืนยันการจอง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">ยืนยันการลบ</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <i class="fas fa-exclamation-triangle"
+                    style="font-size: 3rem; color: #f44336; margin-bottom: 1rem;"></i>
+                <p id="deleteMessage">คุณแน่ใจหรือไม่ที่จะลบรายการนี้?</p>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">การดำเนินการนี้ไม่สามารถย้อนกลับได้</p>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button class="btn btn-secondary" onclick="closeModal('deleteModal')">ยกเลิก</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i> ลบ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>

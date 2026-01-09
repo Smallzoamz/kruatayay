@@ -1,0 +1,137 @@
+/*
+ * ========================================
+ * 🌿 ครัวตายาย - Design System
+ * Thai Restaurant in Garden Theme
+ * ========================================
+ */
+
+:root {
+    /* ===== Color Palette - สวนครัวยาย ===== */
+    
+    /* Primary - น้ำตาลไม้อบอุ่น */
+    --primary: #5D4037;
+    --primary-light: #8D6E63;
+    --primary-dark: #3E2723;
+    --primary-rgb: 93, 64, 55;
+    
+    /* Secondary - เขียวใบไม้สดชื่น */
+    --secondary: #2E7D32;
+    --secondary-light: #81C784;
+    --secondary-dark: #1B5E20;
+    --secondary-rgb: 46, 125, 50;
+    
+    /* Accent - ส้มทองอร่าม */
+    --accent: #FF8F00;
+    --accent-light: #FFB300;
+    --accent-dark: #E65100;
+    
+    /* Background Colors */
+    --bg-primary: #FFF8E1;
+    --bg-secondary: #FFFDE7;
+    --bg-card: #FFFFFF;
+    --bg-overlay: rgba(62, 39, 35, 0.85);
+    
+    /* Text Colors */
+    --text-primary: #3E2723;
+    --text-secondary: #5D4037;
+    --text-muted: #8D6E63;
+    --text-light: #FFFFFF;
+    --text-accent: #FF8F00;
+    
+    /* Border & Shadow */
+    --border-color: #D7CCC8;
+    --border-light: #EFEBE9;
+    --shadow-sm: 0 2px 8px rgba(62, 39, 35, 0.1);
+    --shadow-md: 0 4px 16px rgba(62, 39, 35, 0.15);
+    --shadow-lg: 0 8px 32px rgba(62, 39, 35, 0.2);
+    --shadow-glow: 0 0 20px rgba(255, 143, 0, 0.3);
+    
+    /* ===== Typography ===== */
+    --font-thai: 'Prompt', 'Sarabun', sans-serif;
+    --font-body: 'Sarabun', 'Prompt', sans-serif;
+    --font-display: 'Prompt', serif;
+    
+    /* Font Sizes */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    
+    /* Font Weights */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    
+    /* ===== Spacing ===== */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* ===== Border Radius ===== */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-2xl: 2rem;
+    --radius-full: 9999px;
+    
+    /* ===== Transitions ===== */
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+    --transition-slow: 500ms ease;
+    --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* ===== Z-Index ===== */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-tooltip: 600;
+    --z-toast: 700;
+    
+    /* ===== Container ===== */
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1280px;
+    --container-2xl: 1440px;
+    
+    /* ===== Header ===== */
+    --header-height: 80px;
+    --header-height-mobile: 70px;
+}
+
+/* ===== Dark Theme (Admin Panel) ===== */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-card: #333333;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --text-muted: #BDBDBD;
+    --border-color: #424242;
+    --border-light: #333333;
+}

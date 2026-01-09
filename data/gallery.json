@@ -1,0 +1,39 @@
+{
+    "images": [
+        {
+            "id": 1,
+            "title": "บรรยากาศภายในร้าน",
+            "description": "โต๊ะไม้สักท่ามกลางสวนร่มรื่น",
+            "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&h=600&fit=crop",
+            "order": 1
+        },
+        {
+            "id": 2,
+            "title": "มุมสวนหน้าร้าน",
+            "description": "ต้นไม้เขียวขจีให้ความร่มรื่น",
+            "url": "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1000&h=600&fit=crop",
+            "order": 2
+        },
+        {
+            "id": 3,
+            "title": "โซนครอบครัว",
+            "description": "พื้นที่นั่งสบายสำหรับครอบครัว",
+            "url": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1000&h=600&fit=crop",
+            "order": 3
+        },
+        {
+            "id": 4,
+            "title": "มุมริมน้ำ",
+            "description": "ทานอาหารชมวิวริมบ่อน้ำ",
+            "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1000&h=600&fit=crop",
+            "order": 4
+        },
+        {
+            "id": 5,
+            "title": "บรรยากาศยามเย็น",
+            "description": "แสงไฟอบอุ่นยามค่ำคืน",
+            "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1000&h=600&fit=crop",
+            "order": 5
+        }
+    ]
+}
