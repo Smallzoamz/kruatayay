@@ -249,9 +249,16 @@ const FloatingLeaves = {
 
         this.injectStyles();
 
-        // Create MORE initial leaves (15 instead of 8)
-        for (let i = 0; i < 15; i++) {
-            setTimeout(() => this.createLeaf(), i * 600);
+        // Check for mobile device
+        const isMobile = window.innerWidth < 768;
+
+        // Reduce particles on mobile (5 vs 15)
+        const initialCount = isMobile ? 5 : 15;
+        const spawnInterval = isMobile ? 1500 : 600;
+
+        // Create initial leaves
+        for (let i = 0; i < initialCount; i++) {
+            setTimeout(() => this.createLeaf(), i * spawnInterval);
         }
 
         this.scheduleNextLeaf();

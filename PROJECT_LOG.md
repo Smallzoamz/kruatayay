@@ -57,5 +57,6 @@
 | 2026-01-09 18:30 | app.js | 72-74 | initParallax | Edited | ปิดการทำงานของ Parallax บนจอ Mobile/Tablet (<1024px) เพื่อแก้ปัญหากระตุก |
 | 2026-01-09 18:35 | server.js | 27-40 | GET /api/menu | Fixed | แก้ไขการส่งข้อมูลให้เป็น formats แบบ camelCase (item.category, item.isPopular) เพื่อให้ตรงกับ Frontend |
 | 2026-01-09 18:36 | admin.js | 343-346 | renderMenuTable | Fixed | เพิ่ม Single Quote ครอบ item.id ในปุ่ม Edit/Delete เพื่อป้องกัน error กรณี ID เป็น string |
+| 2026-01-09 18:40 | components.js | 246-333 | FloatingLeaves | Optimized | ลดจำนวนใบไม้ (15->5) และความถี่ (ช้าลง 4 เท่า) บนมือถือเพื่อแก้ปัญหาเครื่องหน่วง |
 
 
