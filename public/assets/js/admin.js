@@ -98,14 +98,15 @@ async function showAdminDashboard() {
  */
 async function loadAllData() {
     try {
-        // Load in parallel
+        // Load in parallel with Authorization header
+        const authHeader = { 'Authorization': `Bearer ${ADMIN_CODE}` };
         const [menuRes, galleryRes, reservationsRes, newsRes, settingsRes, reviewsRes] = await Promise.all([
             fetch('/api/menu').then(r => r.json()),
             fetch('/api/gallery').then(r => r.json()),
-            fetch('/api/reservations').then(r => r.json()),
+            fetch('/api/reservations', { headers: authHeader }).then(r => r.json()),
             fetch('/api/news').then(r => r.json()),
             fetch('/api/settings').then(r => r.json()),
-            fetch('/api/reviews/all').then(r => r.json())
+            fetch('/api/reviews/all', { headers: authHeader }).then(r => r.json())
         ]);
 
         AdminState.data.menu = menuRes;
@@ -402,14 +403,20 @@ async function saveMenu() {
         if (id) {
             await fetch(`/api/menu/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('แก้ไขเมนูสำเร็จ', 'success');
         } else {
             await fetch('/api/menu', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('เพิ่มเมนูสำเร็จ', 'success');
@@ -512,14 +519,20 @@ async function saveGallery() {
         if (id) {
             await fetch(`/api/gallery/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('แก้ไขรูปภาพสำเร็จ', 'success');
         } else {
             await fetch('/api/gallery', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('เพิ่มรูปภาพสำเร็จ', 'success');
@@ -676,7 +689,10 @@ async function updateReservationStatus(id, status) {
     try {
         await fetch(`/api/reservations/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ADMIN_CODE}`
+            },
             body: JSON.stringify({ status })
         });
 
@@ -787,14 +803,20 @@ async function saveNews() {
         if (id) {
             await fetch(`/api/news/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('แก้ไขข่าวสำเร็จ', 'success');
         } else {
             await fetch('/api/news', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_CODE}`
+                },
                 body: JSON.stringify(data)
             });
             showToast('เพิ่มข่าวสำเร็จ', 'success');
@@ -890,7 +912,10 @@ function initSettingsForms() {
             try {
                 await fetch('/api/settings', {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${ADMIN_CODE}`
+                    },
                     body: JSON.stringify(data)
                 });
                 showToast('บันทึกข้อมูลร้านสำเร็จ', 'success');
@@ -918,7 +943,10 @@ function initSettingsForms() {
             try {
                 await fetch('/api/settings', {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${ADMIN_CODE}`
+                    },
                     body: JSON.stringify(data)
                 });
                 showToast('บันทึกข้อมูลเกี่ยวกับร้านสำเร็จ', 'success');
@@ -948,7 +976,10 @@ function initSettingsForms() {
             try {
                 await fetch('/api/settings', {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${ADMIN_CODE}`
+                    },
                     body: JSON.stringify(data)
                 });
                 showToast('บันทึกข้อมูลผู้ก่อตั้งสำเร็จ', 'success');
@@ -984,7 +1015,10 @@ async function executeDelete() {
     const { type, id } = AdminState.deleteContext;
 
     try {
-        await fetch(`/api/${type}/${id}`, { method: 'DELETE' });
+        await fetch(`/api/${type}/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${ADMIN_CODE}` }
+        });
         showToast('ลบสำเร็จ', 'success');
         closeModal('deleteModal');
         await loadAllData();
@@ -1284,7 +1318,10 @@ async function approveReview(id) {
 
         const res = await fetch(`/api/reviews/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ADMIN_CODE}`
+            },
             body: JSON.stringify(updatedReview)
         });
 

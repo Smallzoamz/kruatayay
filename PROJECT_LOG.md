@@ -58,5 +58,13 @@
 | 2026-01-09 18:35 | server.js | 27-40 | GET /api/menu | Fixed | แก้ไขการส่งข้อมูลให้เป็น formats แบบ camelCase (item.category, item.isPopular) เพื่อให้ตรงกับ Frontend |
 | 2026-01-09 18:36 | admin.js | 343-346 | renderMenuTable | Fixed | เพิ่ม Single Quote ครอบ item.id ในปุ่ม Edit/Delete เพื่อป้องกัน error กรณี ID เป็น string |
 | 2026-01-09 18:40 | components.js | 246-333 | FloatingLeaves | Optimized | ลดจำนวนใบไม้ (15->5) และความถี่ (ช้าลง 4 เท่า) บนมือถือเพื่อแก้ปัญหาเครื่องหน่วง |
+| 2026-01-10 00:35 | db_pg.js | 666 | loyalty_customers | Edited | เพิ่ม Migration 20: nickname, birthdate, is_profile_completed |
+| 2026-01-10 00:36 | server.js | 606 | /api/member/profile | Edited | เพิ่ม API endpoints สำหรับดึงและแก้ไขข้อมูลสมาชิก พร้อมแจกแต้มพิเศษ 50 แต้ม |
+| 2026-01-10 00:37 | profile.html | 1 | - | Created | สร้างหน้า LIFF Profile สำหรับแก้ไขข้อมูลสมาชิก |
+| 2026-01-10 15:55 | server.js | 10-40 | Security Header, Rate Limit | Edited | ติดตั้ง Helmet, Express Rate Limit และระบบ Admin Authorization |
+| 2026-01-10 15:56 | index.html | 12-80 | SEO, JSON-LD | Edited | เพิ่ม Structured Data (Schema.org), Canonical URL และ Meta Robots |
+| 2026-01-10 15:57 | robots.txt, sitemap.xml | 1 | - | Created | สร้างไฟล์ robots.txt และ sitemap.xml สำหรับ SEO Indexing |
+| 2026-01-10 15:58 | admin.js | 100-1310 | API Auth | Edited | อัพเดท Admin Panel ให้ส่ง Authorization Header สำหรับคำขอที่ต้องใช้สิทธิ์ |
+| 2026-01-10 15:59 | server.js | 365-385 | xss | Edited | เพิ่ม Stealth Validation สำหรับ Reviews ป้องกันการโจมตี XSS |
 
 

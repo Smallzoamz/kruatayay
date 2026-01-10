@@ -9,10 +9,43 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss');
 const { pool, query } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ==========================================
+// SECURITY CONFIGURATION (Stealth Protection)
+// ==========================================
+
+// 1. Helmet for security headers
+app.use(helmet({
+    contentSecurityPolicy: false, // Disable CSP if it interferes with external CDNs for now, or configure properly
+}));
+
+// 2. Rate Limiting
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Too many requests from this IP, please try again after 15 minutes' }
+});
+app.use('/api/', apiLimiter);
+
+// 3. Admin Authentication Middleware
+const ADMIN_SECRET = process.env.ADMIN_SECRET_KEY || 'krua-admin-2026';
+const adminAuth = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    if (authHeader === `Bearer ${ADMIN_SECRET}`) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Unauthorized: Admin access required' });
+    }
+};
 
 // Middleware
 app.use(cors());
@@ -49,7 +82,7 @@ app.get('/api/menu', async (req, res) => {
 });
 
 // POST new menu item
-app.post('/api/menu', async (req, res) => {
+app.post('/api/menu', adminAuth, async (req, res) => {
     try {
         const { name, category, price, description, image, isPopular, isAvailable, id: reqId } = req.body;
         // Use provided ID or generate a timestamp one to match legacy behavior
@@ -70,7 +103,7 @@ app.post('/api/menu', async (req, res) => {
 });
 
 // PUT update menu item
-app.put('/api/menu/:id', async (req, res) => {
+app.put('/api/menu/:id', adminAuth, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const { name, category, price, description, image, isPopular, isAvailable } = req.body;
@@ -112,7 +145,7 @@ app.put('/api/menu/:id', async (req, res) => {
 });
 
 // DELETE menu item
-app.delete('/api/menu/:id', async (req, res) => {
+app.delete('/api/menu/:id', adminAuth, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         await query('DELETE FROM menu_items WHERE id = $1', [id]);
@@ -368,7 +401,12 @@ app.get('/api/reviews/all', async (req, res) => {
 
 app.post('/api/reviews', async (req, res) => {
     try {
-        const { name, rating, comment } = req.body;
+        let { name, rating, comment } = req.body;
+
+        // Stealth Validation: Sanitize Inputs
+        name = xss(name || 'ลูกค้า');
+        comment = xss(comment || '');
+
         const id = Date.now();
         const approved = false;
         const createdAt = new Date().toISOString();
@@ -376,7 +414,7 @@ app.post('/api/reviews', async (req, res) => {
         await query(
             `INSERT INTO reviews (id, name, rating, comment, approved, created_at)
              VALUES ($1, $2, $3, $4, $5, $6)`,
-            [id, name || 'ลูกค้า', rating, comment, approved, createdAt]
+            [id, name, rating, comment, approved, createdAt]
         );
 
         res.status(201).json({ message: 'Review submitted', review: { id, name, rating, comment, approved, date: createdAt } });
@@ -600,6 +638,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+
 app.listen(PORT, () => {
     console.log(`🌿 Krua Ta Yai Server running on port ${PORT} (PostgreSQL Mode)`);
 });
+
